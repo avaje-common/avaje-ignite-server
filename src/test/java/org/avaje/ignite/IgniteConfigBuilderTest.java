@@ -32,7 +32,7 @@ public class IgniteConfigBuilderTest {
   @Test
   public void parseAddresses() throws Exception {
 
-    Collection<String> addresses = builder.parseAddresses(", 127.0.0.2;127.0.0.3");
+    Collection<String> addresses = builder.parseAddresses("127.0.0.1, 127.0.0.2;127.0.0.3");
     assertTrue(addresses.contains("127.0.0.1"));
     assertTrue(addresses.contains("127.0.0.2"));
     assertTrue(addresses.contains("127.0.0.3"));
