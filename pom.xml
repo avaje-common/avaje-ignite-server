@@ -10,11 +10,11 @@
 
   <groupId>org.avaje</groupId>
   <artifactId>avaje-ignite-server</artifactId>
-  <version>1.1.1</version>
+  <version>1.1.2-SNAPSHOT</version>
 
   <scm>
     <developerConnection>scm:git:https://github.com/avaje-common/avaje-ignite-server.git</developerConnection>
-    <tag>avaje-ignite-server-1.1.1</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <properties>
