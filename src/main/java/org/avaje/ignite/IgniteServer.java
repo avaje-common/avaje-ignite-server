@@ -3,6 +3,7 @@ package org.avaje.ignite;
 import org.apache.ignite.Ignite;
 import org.apache.ignite.Ignition;
 import org.apache.ignite.configuration.IgniteConfiguration;
+import org.apache.ignite.logger.slf4j.Slf4jLogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,6 +23,9 @@ public class IgniteServer {
 
   public IgniteServer(boolean useStdInShutdown, IgniteConfiguration configuration) {
     this.useStdInShutdown = useStdInShutdown;
+    if (configuration.getGridLogger() == null) {
+      configuration.setGridLogger(new Slf4jLogger(logger));
+    }
     this.ignite = Ignition.start(configuration);
   }
 
@@ -46,15 +50,14 @@ public class IgniteServer {
 
     try {
       if (useStdInShutdown) {
-        logger.info("started server, use CTRL-D to stop");
-        // generally for use in IDE via JettyRun, Use CTRL-D in IDE console to shutdown
+        logger.info("started server, can use CTRL-D to stop");
+        // generally for use in IDE, Use CTRL-D in IDE console to shutdown
         BufferedReader systemIn = new BufferedReader(new InputStreamReader(System.in, "UTF-8"));
         while ((systemIn.readLine()) != null) {
           // ignore anything except CTRL-D by itself
         }
         System.out.println("Shutdown via CTRL-D");
         System.exit(0);
-
       }
     } catch (Exception e) {
       e.printStackTrace();

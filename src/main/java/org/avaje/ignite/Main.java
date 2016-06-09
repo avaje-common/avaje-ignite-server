@@ -16,7 +16,7 @@ public class Main {
     checkLogback();
 
     Properties properties = PropertiesLoader.load();
-    IgniteConfigBuilder configBuilder = new IgniteConfigBuilder(properties);
+    IgniteConfigBuilder configBuilder = new IgniteConfigBuilder("ignite", properties);
 
     IgniteServer server = new IgniteServer(true, configBuilder.build());
     server.run();
@@ -34,7 +34,6 @@ public class Main {
       if (localLogback.exists()) {
         System.setProperty("logback.configurationFile", "logback.xml");
       } else {
-        System.err.println("No local logback.xml file found? ... Using default-logback.xml");
         System.setProperty("logback.configurationFile", "default-logback.xml");
       }
     }
